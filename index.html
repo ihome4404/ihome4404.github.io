@@ -126,7 +126,1784 @@ header += "<!DOCTYPE HTML>\r\n<html>\r\n";
 
 -->
 
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
 
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
 
 
 
@@ -202,3 +1979,1530 @@ header += "<!DOCTYPE HTML>\r\n<html>\r\n";
   
   </body>
   </html>
+
+
+
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
+<!-- ihome4404.github.io
+Project Website to control the electronics in my house.
+
+
+header += "<!DOCTYPE HTML>\r\n<html>\r\n";
+  
+  header += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, height=device-height\">\r\n";
+  //client.println("<link rel=\"icon\" href=\"data:,\">\r\n";
+  // CSS to style the on/off buttons 
+  // Feel free to change the background-color and font-size attributes to fit your preferences
+  header += "<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\r\n";
+  
+  //header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += ".button { background-color: #77878A; border: none; color: white; padding: 16px 40px;\r\n"; // lighter for off
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  
+  header += ".buttonOn {background-color: #195B6A; border: none; color: white; padding: 16px 40px;\r\n";//}\r\n</style>\r\n</head>\r\n"; //darker for on
+  header += "text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}\r\n";
+  // close style and heading
+  header += "</style>\r\n</head>\r\n";
+  
+  
+  header += "<body><h1>Rob's ESP8266 Direct Wifi Web Server</h1>\r\n";
+
+
+  
+  // If we're setting the LED, print out a message saying we did
+  if (request == "pin4=off") // Blue LED is off
+  {
+    //header += "The Blue LED is off.\r\n";
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin4=on")
+  { // If we're reading pins, print out those values:
+    // the button should say "off" and it should html href the on state when pressed
+    header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    // this is how to send an analog pin's read value to the html page
+    //    s += "Analog Pin = ";
+    //    s += String(analogRead(ESP8266_Analog));
+    
+    // I need to know the current state of the LEDs so I can send their unchanged html code
+    if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+    else if (pin5state == "off")
+    {
+      // show the unchanged state of the other button
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+    }
+  }
+  else if (request == "pin5=off") // if green led is off
+  {
+    // print blue state, then green state:
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+  }
+  else if (request == "pin5=on")  // the green led should be on:
+  {
+    if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    else if (pin4state == "off")
+    {
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+    }
+    // show the green led as on.
+    header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+  }
+  else if (request == "")
+  {
+    // blue LED state
+    if (pin4state == "off")
+    {
+      //header += "<p><a href=\"/pin4=on\"><button class=\"button\">Blue LED is off</button></a></p>";
+      header += "<p><a href=\"/pin4=on\"><input type=\"button\" class=\"button\" value=\"Blue LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin4=on\"><input type=\"submit\" class=\"button\" value=\"Blue LED is off\"></input></a></p>";
+    }
+    else if (pin4state == "on")
+    {
+      header += "<p><a href=\"/pin4=off\"><input type=\"button\" class=\"buttonOn\" value=\"Blue LED is on\"></a></p>";
+    }
+    
+    // Green LED state
+    if (pin5state == "off")
+    {
+      //header += "<p><a href=\"/pin5=on\"><button class=\"button\">Green LED is off</button></a></p>";
+      header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></a></p>";
+      //header += "<p><a href=\"/pin5=on\"><input type=\"button\" class=\"button\" value=\"Green LED is off\"></input></a></p>";
+    }
+    else if (pin5state == "on")
+    {
+      header += "<p><a href=\"/pin5=off\"><input type=\"button\" class=\"buttonOn\" value=\"Green LED is on\"></a></p>";
+    }
+  }
+  else
+  {
+    header += "Invalid Request. <p>Try /pin4=on, /pin4=off, /pin5=on, etc.</p>";
+  }
+
+
+  
+
+
+  header += "\r\n</body>\r\n</html>\n"; // close it up
+
+-->
